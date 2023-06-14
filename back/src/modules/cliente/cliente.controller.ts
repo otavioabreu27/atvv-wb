@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Delete, Body, Param } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Delete,
+  Body,
+  Param,
+  Res,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { ClienteService } from './cliente.service';
 import { Cliente } from './cliente.entity';
 
@@ -33,16 +42,19 @@ export class ClienteController {
   }
 
   @Delete(':id')
-  async deletaCliente(@Param('id') id: string): Promise<string> {
+  async deletaCliente(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<any> {
     try {
       const resp = await this.clienteService.deletaCliente(id);
-      if (resp.affected != 0) {
-        return 'Deletado';
+      if (resp == true) {
+        res.status(200).send('OK');
       } else {
-        return 'Nenhuma linha afetada';
+        res.status(404).send('Not found');
       }
     } catch (e) {
-      return e;
+      res.status(400).send(`Error: ${e}`);
     }
   }
 }

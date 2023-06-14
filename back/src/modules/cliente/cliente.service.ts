@@ -26,7 +26,12 @@ export class ClienteService {
     return this.Cliente.save(cliente);
   }
 
-  async deletaCliente(id: string): Promise<DeleteResult> {
-    return this.Cliente.delete(parseInt(id));
+  async deletaCliente(id: string): Promise<boolean> {
+    const resp = await this.Cliente.delete(parseInt(id));
+    if (resp.affected == 0) {
+      return false;
+    } else {
+      return true;
+    }
   }
 }
