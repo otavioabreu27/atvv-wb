@@ -30,4 +30,12 @@ export class ProdutoService {
     const resp = await this.Produto.delete(parseInt(id));
     return resp.affected ? true : false;
   }
+
+  async alteraProduto(id: string, produto: Produto): Promise<Produto> {
+    await this.Produto.update(parseInt(id), produto);
+    const produtoAlterado = await this.Produto.findOne({
+      where: { id: parseInt(id) },
+    });
+    return produtoAlterado;
+  }
 }

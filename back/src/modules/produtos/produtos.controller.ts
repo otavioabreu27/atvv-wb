@@ -6,6 +6,7 @@ import {
   Post,
   Delete,
   Res,
+  Put,
 } from '@nestjs/common';
 import { Response } from 'express';
 import { ProdutoService } from './produtos.service';
@@ -55,6 +56,19 @@ export class ProdutoController {
       resp ? res.status(200).send('OK') : res.status(404).send('Not found');
     } catch (e) {
       res.send(400).send(`Error: ${e}`);
+    }
+  }
+
+  @Put(':id')
+  async alteraProduto(
+    @Param('id') id: string,
+    @Body() produto: Produto,
+  ): Promise<Produto> {
+    try {
+      const resp = await this.produtoService.alteraProduto(id, produto);
+      return resp;
+    } catch (e) {
+      return e;
     }
   }
 }
