@@ -23,7 +23,7 @@ export class ClienteController {
   }
 
   @Post()
-  createCliente(@Body() cliente: Cliente) {
+  criaCliente(@Body() cliente: Cliente) {
     try {
       const resp = this.clienteService.criaCliente(cliente);
       return resp;

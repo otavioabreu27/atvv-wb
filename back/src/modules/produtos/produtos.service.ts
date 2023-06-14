@@ -21,4 +21,8 @@ export class ProdutoService {
       },
     });
   }
+
+  async criaProduto(produto: Produto): Promise<Produto> {
+    return this.Produto.save(produto);
+  }
 }
