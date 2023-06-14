@@ -30,4 +30,12 @@ export class ClienteService {
     const resp = await this.Cliente.delete(parseInt(id));
     return resp.affected ? true : false;
   }
+
+  async alteraCliente(id: string, cliente: Cliente): Promise<Cliente> {
+    await this.Cliente.update(parseInt(id), cliente);
+    const clienteAlterado = await this.Cliente.findOne({
+      where: { id: parseInt(id) },
+    });
+    return clienteAlterado;
+  }
 }
