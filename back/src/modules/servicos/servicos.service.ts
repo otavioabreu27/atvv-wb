@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Servico } from './servicos.entity';
-import { DeleteResult, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ServicoService {
@@ -28,11 +28,7 @@ export class ServicoService {
 
   async deletaServico(id: string): Promise<boolean> {
     const resp = await this.Servico.delete(parseInt(id));
-    if (resp.affected == 0) {
-      return false;
-    } else {
-      return true;
-    }
+    return resp.affected ? true : false;
   }
 
   async alteraServico(id: string, servico: Servico): Promise<Servico> {

@@ -48,13 +48,9 @@ export class ClienteController {
   ): Promise<any> {
     try {
       const resp = await this.clienteService.deletaCliente(id);
-      if (resp == true) {
-        res.status(200).send('OK');
-      } else {
-        res.status(404).send('Not found');
-      }
+      resp ? res.status(200).send('OK') : res.status(404).send('Not found');
     } catch (e) {
-      res.status(400).send(`Error: ${e}`);
+      res.send(400).send(`Error: ${e}`);
     }
   }
 }

@@ -1,4 +1,13 @@
-import { Controller, Get, Param, Body, Post, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Param,
+  Body,
+  Post,
+  Delete,
+  Res,
+} from '@nestjs/common';
+import { Response } from 'express';
 import { ProdutoService } from './produtos.service';
 import { Produto } from './produtos.entity';
 
@@ -37,16 +46,15 @@ export class ProdutoController {
   }
 
   @Delete(':id')
-  async deletaProduto(@Param('id') id: string): Promise<string> {
+  async deletaProduto(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<void> {
     try {
       const resp = await this.produtoService.deletaProduto(id);
-      if (resp.affected != 0) {
-        return 'Deletado';
-      } else {
-        return 'Nenhuma linha afetada';
-      }
+      resp ? res.status(200).send('OK') : res.status(404).send('Not found');
     } catch (e) {
-      return e;
+      res.send(400).send(`Error: ${e}`);
     }
   }
 }
