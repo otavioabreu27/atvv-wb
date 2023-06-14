@@ -4,6 +4,7 @@ import { ClienteModule } from './modules/cliente/cliente.module';
 import { ProdutoModule } from './modules/produtos/produtos.module';
 import { ServicoModule } from './modules/servicos/servico.module';
 import { ProdutosConsumidosModule } from './modules/produtosConsumidos/produtosConsumidos.module';
+import { ServicosConsumidosModule } from './modules/servicosConsumidos/servicosConsumidos.module';
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { ProdutosConsumidosModule } from './modules/produtosConsumidos/produtosC
     ProdutoModule,
     ServicoModule,
     ProdutosConsumidosModule,
+    ServicosConsumidosModule,
   ],
 })
 export class AppModule {}
