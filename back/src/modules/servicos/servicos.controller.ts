@@ -33,7 +33,7 @@ export class ServicoController {
   }
 
   @Delete(':id')
-  async deletaCliente(@Param('id') id: string): Promise<string> {
+  async deletaServico(@Param('id') id: string): Promise<string> {
     try {
       const resp = await this.servicoService.deletaServico(id);
       if (resp.affected != 0) {
