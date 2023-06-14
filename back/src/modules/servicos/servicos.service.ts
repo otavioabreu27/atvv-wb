@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Servico } from './servicos.entity';
-import { Repository } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
 
 @Injectable()
 export class ServicoService {
@@ -24,5 +24,9 @@ export class ServicoService {
 
   async criaServico(servico: Servico): Promise<Servico> {
     return this.Servico.save(servico);
+  }
+
+  async deletaServico(id: string): Promise<DeleteResult> {
+    return await this.Servico.delete(parseInt(id));
   }
 }
