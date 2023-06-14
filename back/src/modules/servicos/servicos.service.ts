@@ -21,4 +21,8 @@ export class ServicoService {
       },
     });
   }
+
+  async criaServico(servico: Servico): Promise<Servico> {
+    return this.Servico.save(servico);
+  }
 }
