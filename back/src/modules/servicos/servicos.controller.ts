@@ -1,6 +1,16 @@
-import { Body, Controller, Param, Get, Post, Delete } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Param,
+  Get,
+  Post,
+  Delete,
+  Put,
+  Res,
+} from '@nestjs/common';
 import { ServicoService } from './servicos.service';
 import { Servico } from './servicos.entity';
+import { Response } from 'express';
 
 @Controller('servico')
 export class ServicoController {
@@ -33,14 +43,27 @@ export class ServicoController {
   }
 
   @Delete(':id')
-  async deletaServico(@Param('id') id: string): Promise<string> {
+  async deletaServico(
+    @Param('id') id: string,
+    @Res() res: Response,
+  ): Promise<any> {
     try {
       const resp = await this.servicoService.deletaServico(id);
-      if (resp.affected != 0) {
-        return 'Deletado';
+      if (resp == true) {
+        res.status(200).send('OK');
       } else {
-        return 'Nenhuma linha afetada';
+        res.status(404).send('Not found');
       }
+    } catch (e) {
+      res.status(400).send(`Error: ${e}`);
+    }
+  }
+
+  @Put(':id')
+  async alteraServico(@Body() servico: Servico, @Param('id') id: string) {
+    try {
+      const resp = await this.servicoService.alteraServico(id, servico);
+      return resp;
     } catch (e) {
       return e;
     }

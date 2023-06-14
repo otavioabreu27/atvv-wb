@@ -26,7 +26,20 @@ export class ServicoService {
     return this.Servico.save(servico);
   }
 
-  async deletaServico(id: string): Promise<DeleteResult> {
-    return await this.Servico.delete(parseInt(id));
+  async deletaServico(id: string): Promise<boolean> {
+    const resp = await this.Servico.delete(parseInt(id));
+    if (resp.affected == 0) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  async alteraServico(id: string, servico: Servico): Promise<Servico> {
+    await this.Servico.update(parseInt(id), servico);
+    const servicoAlterado = await this.Servico.findOne({
+      where: { id: parseInt(id) },
+    });
+    return servicoAlterado;
   }
 }
