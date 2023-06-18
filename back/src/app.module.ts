@@ -7,6 +7,7 @@ import { ProdutosConsumidosModule } from './modules/produtosConsumidos/produtosC
 import { ServicosConsumidosModule } from './modules/servicosConsumidos/servicosConsumidos.module';
 import { TelefonesModule } from './modules/telefones/telefones.module';
 import { RgModule } from './modules/rg/rg.module';
+import { CpfModule } from './modules/cpf/cpf.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
@@ -26,6 +27,7 @@ import { RgModule } from './modules/rg/rg.module';
     ServicosConsumidosModule,
     TelefonesModule,
     RgModule,
+    CpfModule,
   ],
 })
 export class AppModule {}

@@ -13,6 +13,13 @@ export class RgService {
     private readonly Cliente: Repository<Cliente>,
   ) {}
 
+  async listaRg(id: string) {
+    const respArray = await this.Rg.createQueryBuilder('rg')
+      .where('rg.clienteId = :clienteId', { clienteId: parseInt(id) })
+      .getMany();
+    return respArray;
+  }
+
   async criaRg(rgs: Array<any>) {
     const respArray = {
       created: [],

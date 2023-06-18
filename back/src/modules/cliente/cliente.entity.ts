@@ -4,6 +4,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
   OneToMany,
+  JoinColumn,
 } from 'typeorm';
 import { ProdutosConsumidos } from '../produtosConsumidos/produtosConsumidos.entity';
 import { ServicosConsumidos } from '../servicosConsumidos/servicosConsumidos.entity';
@@ -32,6 +33,7 @@ export class Cliente {
     () => ProdutosConsumidos,
     (produtosConsumidos) => produtosConsumidos.cliente,
   )
+  @JoinColumn()
   produtosConsumidos: ProdutosConsumidos[];
 
   @OneToMany(
